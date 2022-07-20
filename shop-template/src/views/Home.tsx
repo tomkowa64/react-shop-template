@@ -1,19 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ProductGrid from "../components/ProductGrid";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Subscribe from "../components/Subscribe";
 import Newsletter from "../components/Newsletter";
+import { Product } from "../models/Product";
+import { productApiService } from "../services/ProductService";
 import "../styles/Home.sass";
 
 interface HomeState {
+  ProductList: Product[];
   IsNewsletterVisible: boolean;
 }
 
 export default class Home extends React.Component<{}, HomeState> {
   state = {
+    ProductList: [],
     IsNewsletterVisible: false,
   };
+
+  async componentDidMount() {
+    this.setState({
+      ProductList: await productApiService.getProducts(),
+    });
+  }
 
   toggleNewsletterVisible() {
     this.setState((prevState) => ({
@@ -64,6 +75,7 @@ export default class Home extends React.Component<{}, HomeState> {
             <div className="w3-container w3-text-grey" id="jeans">
               <p>30 items</p>
             </div>
+            <ProductGrid ProductList={this.state.ProductList} />
             {/*
           <!-- Product grid -->
           <ProductGrid
