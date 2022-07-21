@@ -14,7 +14,7 @@ export default class ProductGrid extends React.Component<ProductGridProps, {}> {
           {this.props.ProductList.map((product: Product) => (
             <div className="w3-col l3 s6" key={product.id}>
               <div className="w3-display-container grid-item">
-                <Link to="/product">
+                <Link to={"product/" + product.id}>
                   <img
                     src={product.image}
                     alt="product"

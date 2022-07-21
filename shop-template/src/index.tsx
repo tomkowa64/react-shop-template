@@ -2,17 +2,21 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
-import Home from "./views/Home";
+import { Home } from "./views/Home";
+import ProductPage from "./views/ProductPage";
 import reportWebVitals from "./reportWebVitals";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./styles/index.sass";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <Home />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="product/:id" element={<ProductPage />} />
+        </Routes>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -10,10 +10,10 @@ class ProductService extends ApiClient {
   }
 
   public async getProducts(): Promise<Product[]> {
-    this.products = await this.http
+    this.products = (await this.http
       .get<Product[]>("")
       .then(this.handleResponse.bind(this))
-      .catch(this.handleError.bind(this));
+      .catch(this.handleError.bind(this))) as Product[];
     return this.products;
   }
 
