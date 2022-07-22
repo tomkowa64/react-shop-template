@@ -7,6 +7,7 @@ import actions, {
   addToCart,
 } from "../features/cart/CartSlice";
 import { useSelector, useDispatch } from "react-redux";
+
 interface ProductGridProps {
   ProductList: Product[];
 }
@@ -31,12 +32,6 @@ export const ProductGrid: React.FC<ProductGridProps> = (props) => {
                   className="w3-button w3-black"
                   onClick={() => dispatch(addToCart(product))}
                 >
-                  {/*
-                                  @click="
-                            addProductToCart(product);
-                            $emit('setCartModalNewProduct', product);
-                            $emit('showCartModal');"
-                              */}
                   Add to Cart <i className="fa fa-shopping-cart"></i>
                 </button>
               </div>

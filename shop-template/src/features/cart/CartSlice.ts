@@ -29,6 +29,13 @@ export const cartSlice = createSlice({
         state[action.payload.id].count += 1;
       }
     },
+    addCustomQuantity: (state, action: PayloadAction<CartItem>) => {
+      if (state[action.payload.id] === undefined) {
+        state[action.payload.id] = action.payload;
+      } else {
+        state[action.payload.id].count += action.payload.count;
+      }
+    },
     removeFromCart: (state, action: PayloadAction<number>) => {
       delete state[action.payload];
     },
@@ -38,7 +45,8 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, addCustomQuantity } =
+  cartSlice.actions;
 
 export const getCart = (state: RootState) => state;
 export const getCartSize = (state: RootState) => Object.keys(state.cart).length;

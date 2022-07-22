@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { CartItem } from "../models/CartItem";
 import { Product } from "../models/Product";
 import { productApiService } from "../services/ProductService";
+import actions, {
+  getCartSize,
+  getCart,
+  addToCart,
+  addCustomQuantity,
+} from "../features/cart/CartSlice";
+import { useSelector, useDispatch } from "react-redux";
 import "../styles/index.sass";
 import "../styles/Product.sass";
+import { AnyAction } from "@reduxjs/toolkit";
 
 export const ProductPage: React.FC = (props) => {
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const [product, setProduct] = useState<{ [key: string]: any }>({});
   const [purchaseQuantity, setPurchaseQuantity] = useState(1);
@@ -21,6 +31,24 @@ export const ProductPage: React.FC = (props) => {
   function handleQuantitydecrase() {
     if (purchaseQuantity > 1) {
       setPurchaseQuantity(purchaseQuantity - 1);
+    }
+  }
+
+  function addProductToCart(): any {
+    let newProduct: CartItem = {
+      id: product.id,
+      product_name: product.product_name,
+      short_description: product.short_description,
+      price: product.price,
+      image: product.image,
+      company: product.company,
+      count: purchaseQuantity,
+    };
+
+    if (purchaseQuantity === 1) {
+      dispatch(addToCart(newProduct));
+    } else {
+      dispatch(addCustomQuantity(newProduct));
     }
   }
 
@@ -60,7 +88,10 @@ export const ProductPage: React.FC = (props) => {
             </div>
           </div>
           <p>
-            <button className="w3-button w3-black">
+            <button
+              className="w3-button w3-black"
+              onClick={() => addProductToCart()}
+            >
               Cart<i className="fa fa-shopping-cart"></i>
             </button>
           </p>
