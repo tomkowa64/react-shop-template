@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Subscribe = () => {
+export const Subscribe: React.FC = () => {
   return (
     <div className="w3-container w3-black w3-padding-32">
       <h1>Subscribe</h1>

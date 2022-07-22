@@ -1,0 +1,60 @@
+// Breakpoints
+$breakpoint-large: 1280px
+$breakpoint-small: 768px
+$breakpoint-mobile: 320px
+
+@mixin sm-only
+    @media (min-width: $breakpoint-small)
+        @content
+@mixin mobile-only
+    @media (min-width: $breakpoint-mobile)
+        @content
+@mixin lg-only
+    @media (min-width: $breakpoint-large)
+        @content
+
+html, body
+    width: 100vw
+    height: 100vh
+.product-page
+    margin-left: auto !important
+    margin-right: auto !important
+    height: 100%
+    @include mobile-only
+    width: 90%
+    @include lg-only
+    width: 1000px
+.product-quantity-input
+    display: flex
+    border: 1px solid #000
+    width: 200px
+    font-size: 24px
+    .quantity
+        width: 60%
+        display: flex
+        justify-content: center
+        border-left: 1px solid #000
+        border-right: 1px solid #000
+        input
+            width: 100%
+            height: 100%
+            border: 0
+            text-align: center
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button
+            -webkit-appearance: none
+            margin: 0
+        input[type=number]
+            -moz-appearance: textfield
+    .minus, .plus
+        padding: 3px
+        width: 20%
+        display: flex
+        justify-content: center
+        cursor: pointer
+        user-select: none
+        -moz-user-select: none
+        -webkit-user-select: none
+        -ms-user-select: none
+img
+    max-width: 100%

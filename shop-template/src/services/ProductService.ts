@@ -3,7 +3,7 @@ import { Product } from "../models/Product";
 
 class ProductService extends ApiClient {
   private static classInstance?: ProductService;
-  private products!: Product[];
+  private products: Product[];
 
   public constructor() {
     super("http://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6");
@@ -18,12 +18,15 @@ class ProductService extends ApiClient {
   }
 
   public async getProduct(id: number): Promise<Product> {
-    if (this.products === undefined) {
-      this.getProducts();
+    if (this.products === undefined || this.products == null) {
+      return this.ensureFind(
+        (await this.getProducts()).find((product: Product) => product.id === id)
+      );
+    } else {
+      return this.ensureFind(
+        this.products.find((product: Product) => product.id === id)
+      );
     }
-    return this.ensureFind(
-      this.products.find((product: Product) => product.id === id)
-    );
   }
 
   public static getInstance() {

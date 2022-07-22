@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-export const Nav = (props) => {
+interface NavProps {
+  newsletterVisibility: boolean;
+  handleNewsletterVisibilityChange: () => void;
+}
+
+export const Nav: React.FC<NavProps> = (props) => {
   const [isMenuItemShowed, setIsMenuItemShowed] = useState(true);
   const [isSideMenuShowed, setIsSideMenuShowed] = useState(false);
 

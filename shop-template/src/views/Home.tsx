@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import ProductGrid from "../components/ProductGrid";
+import { ProductGrid } from "../components/ProductGrid";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { Subscribe } from "../components/Subscribe";
@@ -8,8 +8,10 @@ import { Newsletter } from "../components/Newsletter";
 import { Product } from "../models/Product";
 import { productApiService } from "../services/ProductService";
 import "../styles/Home.sass";
+import actions, { getCartSize, getCart } from "../features/cart/CartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
-export const Home = () => {
+export const Home: React.FC = () => {
   const [productList, setProductList] = useState([]);
   const [isNewsletterVisible, setIsNewsletterVisible] = useState(false);
 
@@ -37,7 +39,9 @@ export const Home = () => {
             <p className="w3-left">Jeans</p>
             <p className="w3-right">
               <Link to="/cart">
-                <span className="cart-quantity-number">4</span>
+                <span className="cart-quantity-number">
+                  {useSelector(getCartSize)}
+                </span>
                 <i className="fa fa-shopping-cart w3-margin-right"></i>
               </Link>
             </p>

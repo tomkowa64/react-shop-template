@@ -1,4 +1,9 @@
-export const Newsletter = (props) => {
+interface NewsletterProps {
+  newsletterVisibility: boolean;
+  handleNewsletterVisibilityChange: () => void;
+}
+
+export const Newsletter: React.FC<NewsletterProps> = (props) => {
   return (
     <div id="newsletter" className="w3-modal display-block">
       <div className="w3-modal-content w3-animate-zoom w3-padding-32">
